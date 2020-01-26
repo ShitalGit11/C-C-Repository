@@ -1,0 +1,75 @@
+
+#include <vector>
+#include <iostream>
+using namespace std;
+
+#define MINSIZE 2
+#define MAXSIZE 100
+class Solution {
+public:
+   vector<int> decompressRLElist(vector<int>& nums) {
+      int size = nums.size();
+      if (size % 2 != 0)
+      {
+         exit(0);
+      }
+      if (size < MINSIZE || size > MAXSIZE)
+      {
+         exit(0);
+      }
+      //iterator <int> i;
+      for (int i = 0; i< size; i++)
+      {
+         if (nums[i] < 1 || nums[i] > 100)
+         {
+            exit(0);
+         }
+      }
+      vector <int> retvec;
+      if (nums.size() == 2)
+      {
+         for (int i = 0; i<nums[0]; i++)
+         {
+            retvec.push_back(nums[1]);
+         }
+      }
+      else
+      {
+         for (int i = 0, j = 1; i <= size - 2 && j <= size; i += 2, j += 2)
+         {
+            vector <int>  vec = getarray(nums[i], nums[j]);
+            if (retvec.size() == 0)
+            {
+               retvec.insert(retvec.end(), vec.begin(), vec.end());
+            }
+            else
+            {
+               retvec.insert(retvec.end(), vec.begin(), vec.end());
+            }
+         }
+      }
+      return retvec;
+   }
+   vector <int> getarray(int freq, int value)
+   {
+      vector<int> v;
+      for (int i = 0; i<freq; i++)
+      {
+         v.push_back(value);
+      }
+      return v;
+   }
+};
+int main()
+{
+   Solution sobj; 
+   vector<int> vect;
+
+   vect.push_back(42);
+   vect.push_back(39);
+   //vect.push_back(3);
+   //vect.push_back(4);
+   vector <int> vec1 = sobj.decompressRLElist(vect);
+   cout << "end";
+    return 0;
+}
